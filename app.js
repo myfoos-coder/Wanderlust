@@ -100,7 +100,11 @@ app.use((req,res,next)=>{
 //   });
 // //   console.log(results);
 //   res.render("listings/search.ejs", { results, query });
-// }));    
+// }));  
+
+app.get("/", (req, res) => {
+    res.redirect("/listings");   // or render a homepage
+});
 
 app.use("/",userRoutes);
 app.use("/listings",listingRoutes);
