@@ -136,7 +136,76 @@ body {
     color:white !important;
  }
 
+@media (max-width: 767.98px) {
+  .navbar {
+    height: auto;
+    padding: 0.75rem 1rem;
+  }
 
+  .goBack-btn {
+    position: fixed;
+    right: auto;
+    left: 1rem;
+    bottom: 1rem;
+    width: auto;
+  }
 
-  
+  .show-card,
+  .col-8.offset-3,
+  .col-6.offset-3,
+  .col-8.offset-3.mb-3,
+  .card.col-5 {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 
+  .show-img {
+    height: auto !important;
+    max-height: 40vh;
+  }
+
+  #map {
+    width: 100%;
+    min-height: 320px;
+  }
+
+  .btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  .btns a,
+  .btns form {
+    width: 100%;
+    margin: 0;
+  }
+
+  .btns form button {
+    width: 100%;
+  }
+
+  .card {
+    margin-bottom: 1.5rem;
+  }
+
+  .f-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  .starability-slot,
+  .starability-result {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .starability-slot > label {
+    width: 20% !important;
+  }
+}

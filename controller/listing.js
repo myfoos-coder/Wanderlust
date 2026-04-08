@@ -8,10 +8,6 @@ if (!mapToken) {
 
 config.apiKey = mapToken;
 
-// module.exports.index=async (req,res)=>{
-//     const allListings=await Listing.find({});
-//     res.render("listings/index.ejs", {allListings});
-//     };
 
 module.exports.index=async (req, res) => {
     let { q } = req.query;
@@ -49,10 +45,20 @@ module.exports.showListing=async(req,res)=>{
 
 
 module.exports.createListing = async (req,res,next) => {
-    const location = req.body.listing.location;
-    const result = await geocoding.forward(location, { limit: 1 });
+    if (!req.file) {
+      req.flash("error", "Please upload an image for the listing.");
+      return res.redirect("/listings/new");
+    }
 
-    // console.log(result.features[0].geometry);
+    const location = req.body.listing.location;
+    let result;
+    try {
+      result = await geocoding.forward(location, { limit: 1 });
+    } catch (err) {
+      console.error("Geocoding error:", err);
+      req.flash("error", "Unable to geocode the location right now. Please try again later.");
+      return res.redirect("/listings/new");
+    }
 
     if (!result.features?.length) {
       req.flash("error", "Could not geocode the provided location.");
@@ -69,17 +75,6 @@ module.exports.createListing = async (req,res,next) => {
     res.redirect("/listings");
 };
 
-// module.exports.searchListings = async (req, res) => {
-//   const query = req.query.q;
-//   const results = await Listing.find({
-//     $or: [
-//       { title: { $regex: query, $options: "i" } },
-//       { country: { $regex: query, $options: "i" } }
-//     ]
-//   });
-// //   console.log(results);
-//   res.render("listings/search.ejs", { results, query });
-// };
 
 module.exports.renderEditForm=async(req,res)=>{
     let {id} =req.params;
@@ -110,18 +105,7 @@ module.exports.updateListing=async (req,res)=>{
 
     
     }
-    // if (!updatedListing.location) {
-    //     const location = updateData.location || updatedListing.location;
-    //     if (location) {
-    //         const result = await geocoding.forward(location, { limit: 1 });
-    //         if (result.features?.length) {
-    //             updatedListing.geometry = result.features[0].geometry;
-    //             await updatedListing.save();
-    //         } else {
-    //             console.warn("Could not geocode the provided location during update:", location);
-    //         }
-    //     }
-    // }
+
 
 
     req.flash("success", "Listing updated successfully!");
