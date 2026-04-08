@@ -1,5 +1,7 @@
 try {
-  console.log('Map script starting, coordinates:', coordinates, 'mapToken:', !!window.mapToken);
+  const coordinates = window.coordinates;
+  const listingLocation = window.listingLocation || "";
+  console.log('Map script starting, coordinates:', coordinates, 'location:', listingLocation, 'mapToken:', !!window.mapToken);
 
   const mapContainer = document.getElementById('map');
   if (!mapContainer) {
@@ -10,37 +12,30 @@ try {
 
     console.log('Listing coordinates:', listingCoordinates, 'valid:', coordsValid);
 
-    if (!coordsValid) {
-      mapContainer.innerHTML = '<p style="color:#555; padding:1rem; text-align:center;">Map is unavailable because the coordinates are invalid.</p>';
-      console.error('Invalid coordinates format:', coordinates);
+    if (coordsValid) {
+      renderMap(mapContainer, listingCoordinates);
+    } else if (listingLocation.trim()) {
+      console.warn('No geometry found; geocoding listing location fallback:', listingLocation);
+      fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(listingLocation)}&format=geojson&limit=1`, {
+        headers: { 'User-Agent': 'Wanderlust/1.0' }
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const feature = data.features?.[0];
+          if (feature?.geometry?.coordinates && feature.geometry.coordinates.length === 2) {
+            renderMap(mapContainer, feature.geometry.coordinates);
+          } else {
+            mapContainer.innerHTML = '<p style="color:#555; padding:1rem; text-align:center;">Map is unavailable because the location could not be resolved.</p>';
+            console.error('Location fallback failed to geocode:', listingLocation, data);
+          }
+        })
+        .catch((err) => {
+          mapContainer.innerHTML = '<p style="color:#555; padding:1rem; text-align:center;">Map is unavailable because the location lookup failed.</p>';
+          console.error('Nominatim lookup failed:', err);
+        });
     } else {
-      const [lng, lat] = listingCoordinates;
-
-      if (!window.mapToken) {
-        console.warn('MapTiler API key missing in browser. Using OpenStreetMap fallback.');
-        showOSMFallback(mapContainer, lng, lat);
-      } else {
-        try {
-          maptilersdk.config.apiKey = window.mapToken;
-          const map = new maptilersdk.Map({
-            container: 'map',
-            style: maptilersdk.MapStyle.STREETS,
-            center: [lng, lat],
-            zoom: 10
-          });
-
-          new maptilersdk.Marker({color:'black'})
-            .setLngLat([lng, lat])
-            .setPopup(new maptilersdk.Popup({offset:25}).setHTML("<h4>Exact Location</h4>"))
-            .addTo(map);
-
-          console.log('MapTiler map loaded successfully.');
-        } catch (error) {
-          console.error('MapTiler map failed to load:', error);
-          console.warn('Falling back to OpenStreetMap.');
-          showOSMFallback(mapContainer, lng, lat);
-        }
-      }
+      mapContainer.innerHTML = '<p style="color:#555; padding:1rem; text-align:center;">Map is unavailable because the coordinates are invalid.</p>';
+      console.error('Invalid coordinates format and no location fallback available:', coordinates);
     }
   }
 } catch (globalError) {
@@ -48,6 +43,37 @@ try {
   const mapContainer = document.getElementById('map');
   if (mapContainer) {
     mapContainer.innerHTML = '<p style="color:#f00; padding:1rem; text-align:center;">Map failed to load due to a script error.</p>';
+  }
+}
+
+function renderMap(container, listingCoordinates) {
+  const [lng, lat] = listingCoordinates;
+
+  if (!window.mapToken) {
+    console.warn('MapTiler API key missing in browser. Using OpenStreetMap fallback.');
+    showOSMFallback(container, lng, lat);
+    return;
+  }
+
+  try {
+    maptilersdk.config.apiKey = window.mapToken;
+    const map = new maptilersdk.Map({
+      container: 'map',
+      style: maptilersdk.MapStyle.STREETS,
+      center: [lng, lat],
+      zoom: 10
+    });
+
+    new maptilersdk.Marker({color:'black'})
+      .setLngLat([lng, lat])
+      .setPopup(new maptilersdk.Popup({offset:25}).setHTML("<h4>Exact Location</h4>"))
+      .addTo(map);
+
+    console.log('MapTiler map loaded successfully.');
+  } catch (error) {
+    console.error('MapTiler map failed to load:', error);
+    console.warn('Falling back to OpenStreetMap.');
+    showOSMFallback(container, lng, lat);
   }
 }
 
