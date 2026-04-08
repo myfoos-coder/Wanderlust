@@ -50,7 +50,12 @@ module.exports.createListing = async (req,res,next) => {
       return res.redirect("/listings/new");
     }
 
-    const location = req.body.listing.location;
+    const location = req.body.listing.location.trim();
+    if (!location) {
+      req.flash("error", "Please provide a valid location.");
+      return res.redirect("/listings/new");
+    }
+
     let result;
     try {
       result = await geocoding.forward(location, { limit: 1 });
