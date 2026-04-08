@@ -1,9 +1,16 @@
-const mapContainer = document.getElementById('map');
-if (!mapContainer) {
-  console.warn('Map container not found.');
-} else {
+try {
+  console.log('Map script starting, coordinates:', coordinates, 'mapToken:', !!window.mapToken);
+
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) {
+    console.warn('Map container not found.');
+    return;
+  }
+
   const listingCoordinates = coordinates?.coordinates || coordinates;
   const coordsValid = Array.isArray(listingCoordinates) && listingCoordinates.length === 2;
+
+  console.log('Listing coordinates:', listingCoordinates, 'valid:', coordsValid);
 
   if (!coordsValid) {
     mapContainer.innerHTML = '<p style="color:#555; padding:1rem; text-align:center;">Map is unavailable because the coordinates are invalid.</p>';
@@ -38,6 +45,12 @@ if (!mapContainer) {
       showOSMFallback(mapContainer, lng, lat);
     }
   }
+} catch (globalError) {
+  console.error('Map script failed completely:', globalError);
+  const mapContainer = document.getElementById('map');
+  if (mapContainer) {
+    mapContainer.innerHTML = '<p style="color:#f00; padding:1rem; text-align:center;">Map failed to load due to a script error.</p>';
+  }
 }
 
 function showOSMFallback(container, lng, lat) {
@@ -47,6 +60,7 @@ function showOSMFallback(container, lng, lat) {
     <iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="${osmUrl}" style="border:1px solid #ccc; border-radius:0.75rem;"></iframe>
     <p style="font-size:0.9rem; color:#555; text-align:center; margin-top:0.75rem;">Map shown using OpenStreetMap (MapTiler API key not available or invalid).</p>
   `;
+  console.log('OSM fallback loaded.');
 }
 
      
