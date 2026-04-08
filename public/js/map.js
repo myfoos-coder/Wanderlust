@@ -1,5 +1,9 @@
-if (!window.mapToken) {
+const mapContainer = document.getElementById('map');
+if (!mapContainer) {
+  console.warn('Map container not found.');
+} else if (!window.mapToken) {
   console.error('MapTiler API key missing in browser. Set MAPTILER_KEY in your server environment and render it to the page.');
+  mapContainer.innerHTML = '<p style="color:#555; padding:1rem; text-align:center;">Map is unavailable because the API key is missing.</p>';
 } else {
   maptilersdk.config.apiKey = window.mapToken;
   const listingCoordinates = coordinates?.coordinates || coordinates;
