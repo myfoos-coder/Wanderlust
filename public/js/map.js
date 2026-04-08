@@ -4,45 +4,43 @@ try {
   const mapContainer = document.getElementById('map');
   if (!mapContainer) {
     console.warn('Map container not found.');
-    return;
-  }
-
-  const listingCoordinates = coordinates?.coordinates || coordinates;
-  const coordsValid = Array.isArray(listingCoordinates) && listingCoordinates.length === 2;
-
-  console.log('Listing coordinates:', listingCoordinates, 'valid:', coordsValid);
-
-  if (!coordsValid) {
-    mapContainer.innerHTML = '<p style="color:#555; padding:1rem; text-align:center;">Map is unavailable because the coordinates are invalid.</p>';
-    console.error('Invalid coordinates format:', coordinates);
-    return;
-  }
-
-  const [lng, lat] = listingCoordinates;
-
-  if (!window.mapToken) {
-    console.warn('MapTiler API key missing in browser. Using OpenStreetMap fallback.');
-    showOSMFallback(mapContainer, lng, lat);
   } else {
-    try {
-      maptilersdk.config.apiKey = window.mapToken;
-      const map = new maptilersdk.Map({
-        container: 'map',
-        style: maptilersdk.MapStyle.STREETS,
-        center: [lng, lat],
-        zoom: 10
-      });
+    const listingCoordinates = coordinates?.coordinates || coordinates;
+    const coordsValid = Array.isArray(listingCoordinates) && listingCoordinates.length === 2;
 
-      new maptilersdk.Marker({color:'black'})
-        .setLngLat([lng, lat])
-        .setPopup(new maptilersdk.Popup({offset:25}).setHTML("<h4>Exact Location</h4>"))
-        .addTo(map);
+    console.log('Listing coordinates:', listingCoordinates, 'valid:', coordsValid);
 
-      console.log('MapTiler map loaded successfully.');
-    } catch (error) {
-      console.error('MapTiler map failed to load:', error);
-      console.warn('Falling back to OpenStreetMap.');
-      showOSMFallback(mapContainer, lng, lat);
+    if (!coordsValid) {
+      mapContainer.innerHTML = '<p style="color:#555; padding:1rem; text-align:center;">Map is unavailable because the coordinates are invalid.</p>';
+      console.error('Invalid coordinates format:', coordinates);
+    } else {
+      const [lng, lat] = listingCoordinates;
+
+      if (!window.mapToken) {
+        console.warn('MapTiler API key missing in browser. Using OpenStreetMap fallback.');
+        showOSMFallback(mapContainer, lng, lat);
+      } else {
+        try {
+          maptilersdk.config.apiKey = window.mapToken;
+          const map = new maptilersdk.Map({
+            container: 'map',
+            style: maptilersdk.MapStyle.STREETS,
+            center: [lng, lat],
+            zoom: 10
+          });
+
+          new maptilersdk.Marker({color:'black'})
+            .setLngLat([lng, lat])
+            .setPopup(new maptilersdk.Popup({offset:25}).setHTML("<h4>Exact Location</h4>"))
+            .addTo(map);
+
+          console.log('MapTiler map loaded successfully.');
+        } catch (error) {
+          console.error('MapTiler map failed to load:', error);
+          console.warn('Falling back to OpenStreetMap.');
+          showOSMFallback(mapContainer, lng, lat);
+        }
+      }
     }
   }
 } catch (globalError) {
