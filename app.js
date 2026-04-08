@@ -54,17 +54,18 @@ const store = MongoStore.create({
     touchAfter: 24 * 3600 // time period in seconds
 });
 
-store.on("error", ()=>{
-    console.log("ERROR IN MONGO SESSION STORE",err);
+store.on("error", (err)=>{
+    console.log("ERROR IN MONGO SESSION STORE", err);
 });
 
 const sessionOptions={
     store: store,
-    secret:"mysupersecretcode",
+    secret: process.env.SECRET || "mysupersecretcode",
     resave:false,
-    saveUninitialized:true, 
+    saveUninitialized:false,
     cookie:{
         httpOnly:true,
+        sameSite:"lax",
         expires:Date.now()+1000*60*60*24*7,
         maxAge:1000*60*60*24*7
     }
@@ -133,8 +134,9 @@ app.use((err,req,res,next)=>{
 //     res.render("listings/search.ejs", { results, query });
 // }
 // );
-app.listen(3000,()=>{
-    console.log("Server is listening to port 8080");
+const port = process.env.PORT || 3000;
+app.listen(port, ()=>{
+    console.log(`Server is listening on port ${port}`);
 });
 
 

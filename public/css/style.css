@@ -53,12 +53,134 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: space-evenly;
+    align-items: center;
 }
 
 .listing-card{
     border: none !important;
     margin-bottom: 2rem;
+}
+
+.navbar {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 0.75rem;
+}
+
+.search-input {
+    width: 260px;
+    max-width: 100%;
+    transition: width 0.25s ease;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.search-input:focus {
+    width: 100%;
+    outline: none;
+    border-color: #fe424d;
+    box-shadow: 0 0 5px rgba(254, 66, 77, 0.35);
+}
+
+.search-btn {
+    background-color: #fe424d;
+    color: white;
+    border-radius: 25px;
+    padding: 0 1rem;
+}
+
+.search-btn:hover {
+    background-color: #fe424d;
+    color: white;
+}
+
+.search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+    background-size: cover;
+    background-position: center;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.hero-content {
+    max-width: 740px;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    line-height: 1.05;
+}
+
+.hero-content p {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    margin-bottom: 1.75rem;
+}
+
+.hero-section .btn {
+    min-width: 12rem;
+    padding: 0.85rem 1.4rem;
+}
+
+@media (max-width: 991.98px) {
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .navbar-nav {
+    width: 100%;
+  }
+
+  .navbar-nav .nav-link {
+    text-align: center;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .hero-section {
+    min-height: 60vh;
+    padding: 3rem 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .search-input {
+    width: 100%;
+  }
 }
 
 .card-img-top{
