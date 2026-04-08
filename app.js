@@ -103,7 +103,7 @@ app.use((req,res,next)=>{
 // }));  
 
 app.get("/", (req, res) => {
-    res.redirect("/listings");   // or render a homepage
+    res.render("home.ejs");
 });
 
 app.use("/",userRoutes);
