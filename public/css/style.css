@@ -16,6 +16,7 @@ body {
 .navbar{
     height: 5rem;
     background-color: white;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
 }
 .fa-compass{
     color: #fe424d;
@@ -23,7 +24,10 @@ body {
 }
 .nav-link{
     color: #222222 !important;
-
+}
+.nav-link:hover,
+.nav-link:focus{
+    color: #fe424d !important;
 }
 .f-info-links a{
     text-decoration:none ;
@@ -71,6 +75,11 @@ body {
 
 .navbar-brand {
     font-weight: 700;
+    color: #222222 !important;
+}
+
+.navbar-brand:hover {
+    color: #fe424d !important;
 }
 
 .navbar-nav .nav-link {
@@ -84,30 +93,30 @@ body {
     border-radius: 25px;
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    border: 1px solid#fe424d;
-    background-color: #fe424d;
-    color: white;
+    border: 1px solid #ced4da;
+    background-color: #ffffff;
+    color: #212529;
 }
 
 .search-input:focus {
     width: 100%;
     outline: none;
-    border-color: #fe424d;
+    border-color: #86b7fe;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
 .search-btn {
-    background-color: white !important;
-    color: #fe424d    !important;
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
     border: 1px solid #ced4da;
     border-radius: 25px;
     padding: 0 1rem;
 }
 
 .search-btn:hover {
-    background-color: #fe424d;
-    color: #fe424d !important;
-    opacity: 0.8  ;
+    background-color: #e9ecef;
+    color: #212529 !important;
+    opacity: 0.8;
 }
 
 .search-btn i {
