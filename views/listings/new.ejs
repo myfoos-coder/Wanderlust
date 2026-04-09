@@ -34,7 +34,7 @@
       Please provide a valid price.
     </div>
         </div>
-        <div class="class=mb-3 col-md-8">
+        <div class="mb-3 col-md-8">
         <label for="country" class="form-label">Country</label>
         <input name="listing[country]" placeholder="India" type="text" class="form-control" required>
         <div class="invalid-feedback">
@@ -46,6 +46,18 @@
         <input name="listing[location]" placeholder="Banglore, Karnataka" type="text" class="form-control" required>
         <div class="invalid-feedback">
       Please provide a valid location.  
+        </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label d-block">Availability</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="listing[available]" id="availableYes" value="true" checked>
+            <label class="form-check-label" for="availableYes">Available</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="listing[available]" id="availableNo" value="false">
+            <label class="form-check-label" for="availableNo">Unavailable</label>
+          </div>
         </div>
         <button class="btn btn-dark add-btn mt-3">Add</button>
     </form>

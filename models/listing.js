@@ -15,6 +15,10 @@ const listingSchema = new Schema({
   price: Number,
   location: String,
   country: String,
+  available: {
+    type: Boolean,
+    default: true,
+  },
   reviews:[
     {
       type:Schema.Types.ObjectId,
