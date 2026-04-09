@@ -1,37 +1,4 @@
-const https = require("https");
-const Listing=require("../models/listing");
-const { config, geocoding } = require("@maptiler/client");
-const mapToken = process.env.MAPTILER_KEY;
-
-if (!mapToken) {
-  throw new Error("Missing MAPTILER_KEY environment variable. Set it in .env or your deployment environment.");
-}
-
-config.apiKey = mapToken;
-
-async function fallbackGeocode(location) {
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=geojson&limit=1`;
-  return new Promise((resolve, reject) => {
-    https.get(url, { headers: { "User-Agent": "Wanderlust/1.0" } }, (res) => {
-      let body = "";
-      res.on("data", (chunk) => body += chunk);
-      res.on("end", () => {
-        if (res.statusCode !== 200) {
-          return reject(new Error(`Nominatim fallback returned status ${res.statusCode}`));
-        }
-        try {
-          const data = JSON.parse(body);
-          if (data.features?.length) {
-            return resolve(data.features[0]);
-          }
-          resolve(null);
-        } catch (parseErr) {
-          reject(parseErr);
-        }
-      });
-    }).on("error", reject);
-  });
-}
+const Listing = require("../models/listing");
 
 module.exports.index=async (req, res) => {
     let { q } = req.query;
@@ -80,34 +47,9 @@ module.exports.createListing = async (req,res,next) => {
       return res.redirect("/listings/new");
     }
 
-    let result;
-    try {
-      result = await geocoding.forward(location, { limit: 1 });
-    } catch (err) {
-      console.error("MapTiler geocoding failed:", err);
-    }
-
-    if (!result?.features?.length) {
-      try {
-        const fallbackFeature = await fallbackGeocode(location);
-        if (fallbackFeature) {
-          console.warn("Using Nominatim fallback for location:", location);
-          result = { features: [fallbackFeature] };
-        }
-      } catch (fallbackErr) {
-        console.error("Nominatim fallback failed:", fallbackErr);
-      }
-    }
-
-    if (!result?.features?.length) {
-      req.flash("error", "Unable to geocode the location right now. Please try again later.");
-      return res.redirect("/listings/new");
-    }
-
     req.body.listing.image = { url: req.file.path, filename: req.file.filename };
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
-    newListing.geometry = result.features[0].geometry;
  
     await newListing.save();
     req.flash("success","New Listing created!");
