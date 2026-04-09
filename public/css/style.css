@@ -85,8 +85,8 @@ body {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     border: 1px solid #ced4da;
-    background-color: #ffffff;
-    color: #212529;
+    background-color: #fe424d;
+    color: white;
 }
 
 .search-input:focus {
@@ -97,17 +97,17 @@ body {
 }
 
 .search-btn {
-    background-color: #f8f9fa;
-    color: #212529;
+    background-color: #fe424d;
+    color: white    !important;
     border: 1px solid #ced4da;
     border-radius: 25px;
     padding: 0 1rem;
 }
 
 .search-btn:hover {
-    background-color: #e9ecef;
-    color: #212529;
-    border-color: #adb5bd;
+    background-color: #fe424d;
+    color: white !important;
+    opacity: 0.8  ;
 }
 
 .search-btn i {
