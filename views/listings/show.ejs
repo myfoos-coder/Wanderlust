@@ -8,13 +8,13 @@
     <div class="card col-6 offset-3 show-card listing-card">
   <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
   <div class="card-body">
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <% if (listing.available !== false) { %>
           <span class="badge bg-success">Available</span>
         <% } else { %>
           <span class="badge bg-danger">Unavailable</span>
         <% } %>
-      </div>
+      </div> -->
       <div class="mb-3">
         <strong>Contact No:</strong>
         <% if (listing.contactNumber) { %>
@@ -31,6 +31,22 @@
     &#8377;<%=listing.price.toLocaleString("en-IN")%><br>
     <%=listing.location%><br>
      <%=listing.country%>
+      <br>
+        <div class="mb-3">
+          <% if (listing.available !== false) { %>
+            <span class="badge bg-success">Available</span>
+          <% } else { %>
+            <span class="badge bg-danger">Unavailable</span>
+          <% } %>
+        </div>
+     <div class="mb-3">
+        <b>Contact No:</b>
+        <% if (listing.contactNumber) { %>
+          +<%= listing.countryCode || '91' %> <%= listing.contactNumber %>
+        <% } else { %>
+          Not provided
+        <% } %>
+      </div>
     </p>
   </div>
 </div>
