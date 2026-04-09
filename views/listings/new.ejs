@@ -48,6 +48,26 @@
       Please provide a valid location.  
         </div>
         </div>
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="countryCode" class="form-label">Country Code</label>
+            <select name="listing[countryCode]" id="countryCode" class="form-select" required>
+              <option value="91" selected>+91 India</option>
+              <option value="44">+44 UK</option>
+              <option value="1">+1 USA</option>
+              <option value="61">+61 Australia</option>
+              <option value="81">+81 Japan</option>
+              <option value="49">+49 Germany</option>
+            </select>
+          </div>
+          <div class="mb-3 col-md-8">
+            <label for="contactNumber" class="form-label">Contact Number</label>
+            <input name="listing[contactNumber]" id="contactNumber" placeholder="9876543210" type="tel" inputmode="numeric" pattern="[0-9]{6,12}" class="form-control" required>
+            <div class="invalid-feedback">
+              Please provide a valid contact number.
+            </div>
+          </div>
+        </div>
         <div class="mb-3">
           <label class="form-label d-block">Availability</label>
           <div class="form-check form-check-inline">

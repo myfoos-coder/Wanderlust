@@ -52,6 +52,26 @@
       Please provide a valid location.  
         </div>
         </div>
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="countryCode" class="form-label">Country Code</label>
+            <select name="listing[countryCode]" id="countryCode" class="form-select" required>
+              <option value="91" <%= listing.countryCode === "91" ? "selected" : "" %>>+91 India</option>
+              <option value="44" <%= listing.countryCode === "44" ? "selected" : "" %>>+44 UK</option>
+              <option value="1" <%= listing.countryCode === "1" ? "selected" : "" %>>+1 USA</option>
+              <option value="61" <%= listing.countryCode === "61" ? "selected" : "" %>>+61 Australia</option>
+              <option value="81" <%= listing.countryCode === "81" ? "selected" : "" %>>+81 Japan</option>
+              <option value="49" <%= listing.countryCode === "49" ? "selected" : "" %>>+49 Germany</option>
+            </select>
+          </div>
+          <div class="mb-3 col-md-8">
+            <label for="contactNumber" class="form-label">Contact Number</label>
+            <input name="listing[contactNumber]" id="contactNumber" class="form-control" value="<%= listing.contactNumber %>" type="tel" inputmode="numeric" pattern="[0-9]{6,12}" required>
+            <div class="invalid-feedback">
+              Please provide a valid contact number.
+            </div>
+          </div>
+        </div>
         <div class="mb-3">
           <label class="form-label d-block">Availability</label>
           <div class="form-check form-check-inline">

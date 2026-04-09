@@ -8,6 +8,8 @@ module.exports.listingSchema = Joi.object({
         price: Joi.number().required().min(0),
         country: Joi.string().required(),
         available: Joi.boolean().required(),
+        countryCode: Joi.string().valid("91", "44", "1", "61", "81", "49").required(),
+        contactNumber: Joi.string().pattern(/^[0-9]{6,12}$/).required(),
         image: Joi.alternatives().try(
           Joi.object({ url: Joi.string().allow("", null) }).default({ url: "" }),
           Joi.string().allow("", null)

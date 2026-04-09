@@ -19,6 +19,14 @@ const listingSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  countryCode: {
+    type: String,
+    default: "91",
+  },
+  contactNumber: {
+    type: String,
+    required: true,
+  },
   reviews:[
     {
       type:Schema.Types.ObjectId,
