@@ -65,7 +65,7 @@ body {
     margin-bottom: 2rem;
 }
 
-/* .navbar {
+.navbar {
     background-color: white;
     position: sticky;
     top: 0;
@@ -76,7 +76,7 @@ body {
 
 .navbar-nav .nav-link {
     padding: 0.5rem 0.75rem;
-} */
+}
 
 
 .search-input {
@@ -94,7 +94,7 @@ body {
     border: 1px solid #fe424d !important;
     color: #fe424d !important;
     border-radius: 25px;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 0.75rem;
 }
 
 .interactive-btn {
@@ -102,7 +102,7 @@ body {
     border: 1px solid #fe424d !important;
     color: white !important;
     border-radius: 25px;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 0.75rem;
 }
 
 .search-input:focus {
