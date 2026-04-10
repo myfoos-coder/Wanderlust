@@ -94,7 +94,7 @@ body {
     border: 1px solid #fe424d !important;
     color: #fe424d !important;
     border-radius: 25px;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
 }
 
 .interactive-btn {
@@ -102,7 +102,7 @@ body {
     border: 1px solid #fe424d !important;
     color: white !important;
     border-radius: 25px;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
 }
 
 .search-input:focus {
@@ -130,7 +130,7 @@ body {
     margin-right: 0.5rem;
 }
 
-.hero-section {
+/* .hero-section {
     background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
     background-size: cover;
     background-position: center;
@@ -163,7 +163,7 @@ body {
 .hero-section .btn {
     min-width: 12rem;
     padding: 0.85rem 1.4rem;
-}
+} */
 
 .card-img-top{
    border-radius: 1rem !important; 
