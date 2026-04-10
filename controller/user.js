@@ -36,12 +36,12 @@ module.exports.logout=(req,res,next)=>{
         if (err) {
           return next(err);
         }
+        req.flash("success","You have been logged out!");
         req.session.destroy((destroyErr) => {
             if (destroyErr) {
                 return next(destroyErr);
             }
             res.clearCookie("connect.sid");
-            req.flash("success","You have been logged out!");
             res.redirect("/listings");
         });
     });

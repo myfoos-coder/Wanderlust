@@ -22,11 +22,11 @@
         <a class="nav-link nav-link-highlight" href="/listings/new">Airbnb your home</a>
 
         <% if (typeof currentUser === "undefined" || !currentUser) { %>
-        <a class="nav-link nav-link-highlight" aria-current="page" href="/signup"><b>Sign Up</b></a>
-        <a class="nav-link nav-link-highlight" href="/login"><b>Login</b></a>
+        <a class="nav-link interactive-btn" aria-current="page" href="/signup"><b>Sign Up</b></a>
+        <a class="nav-link interactive-btnt" href="/login"><b>Login</b></a>
         <% } %>
         <% if (typeof currentUser !== "undefined" && currentUser) { %>
-        <a class="nav-link nav-link-highlight" href="/logout"><b>Log out</b></a>
+        <a class="nav-link interactive-btn" href="/logout"><b>Log out</b></a>
         <% } %>
       </div>
     </div>
