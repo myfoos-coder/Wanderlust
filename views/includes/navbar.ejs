@@ -19,11 +19,11 @@
 </div>
 
        <div class="navbar-nav ms-auto">
-        <a class="nav-link nav-link-highlight" href="/listings/new">Airbnb your home</a>
+        <a class="nav-link interactive-btn-new" href="/listings/new">Airbnb your home</a>
 
         <% if (typeof currentUser === "undefined" || !currentUser) { %>
         <a class="nav-link interactive-btn" aria-current="page" href="/signup"><b>Sign Up</b></a>
-        <a class="nav-link interactive-btnt" href="/login"><b>Login</b></a>
+        <a class="nav-link interactive-btn" href="/login"><b>Login</b></a>
         <% } %>
         <% if (typeof currentUser !== "undefined" && currentUser) { %>
         <a class="nav-link interactive-btn" href="/logout"><b>Log out</b></a>
