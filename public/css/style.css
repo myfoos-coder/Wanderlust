@@ -91,7 +91,7 @@ body {
 }
 .interactive-btn-new {
     background-color: white !important;
-    border: 1px solid #fe424d !important;
+ 
     color: #fe424d !important;
     border-radius: 25px;
     padding: 0.4rem 0.7rem;
@@ -100,7 +100,6 @@ body {
 
 .interactive-btn {
     background-color: #fe424d !important;
-    border: 1px solid #fe424d !important;
     color: white !important;
     border-radius: 25px;
     padding: 0.4rem 0.7rem;
