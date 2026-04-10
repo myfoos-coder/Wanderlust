@@ -65,7 +65,7 @@ body {
     margin-bottom: 2rem;
 }
 
-.navbar {
+/* .navbar {
     background-color: white;
     position: sticky;
     top: 0;
@@ -73,18 +73,10 @@ body {
     padding: 0.5rem 1rem;
 }
 
-.navbar-brand {
-    font-weight: 700;
-    color: #222222 !important;
-}
-
-.navbar-brand:hover {
-    color: #fe424d !important;
-}
 
 .navbar-nav .nav-link {
     padding: 0.5rem 0.75rem;
-}
+} */
 
 
 .search-input {
@@ -97,7 +89,7 @@ body {
     border: 1px solid #fe424d;
     color: #212529;
 }
-interactive-btn-new {
+.interactive-btn-new {
     background-color: white !important;
     border: 1px solid #fe424d !important;
     color: #fe424d !important;
@@ -115,7 +107,6 @@ interactive-btn-new {
 
 .search-input:focus {
     width: 100%;
-    outline: none;
     border-color: #fe424d !important;
     
 }
